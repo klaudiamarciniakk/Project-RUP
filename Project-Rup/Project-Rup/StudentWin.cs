@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Project_Rup
 {
-    public partial class Form1 : Form
+    public partial class StudentWin : Form
     {
-        public Form1()
+        public StudentWin()
         {
             InitializeComponent();
         }
