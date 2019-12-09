@@ -28,24 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.loginLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // loginLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(131, 95);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Zalogowano :D";
+            this.loginLabel.AutoSize = true;
+            this.loginLabel.Location = new System.Drawing.Point(13, 9);
+            this.loginLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.loginLabel.Name = "loginLabel";
+            this.loginLabel.Size = new System.Drawing.Size(186, 20);
+            this.loginLabel.TabIndex = 0;
+            this.loginLabel.Text = "Zalogowano użytkownika";
             // 
             // StudentWin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(426, 285);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(639, 438);
+            this.Controls.Add(this.loginLabel);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "StudentWin";
             this.Text = "StudentWin";
             this.ResumeLayout(false);
@@ -55,6 +57,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label loginLabel;
     }
 }

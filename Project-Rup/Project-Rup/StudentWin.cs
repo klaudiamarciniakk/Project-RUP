@@ -12,9 +12,10 @@ namespace Project_Rup
 {
     public partial class StudentWin : Form
     {
-        public StudentWin()
+        public StudentWin(string login, string password, object semester)
         {
             InitializeComponent();
+            loginLabel.Text = "Zalogowano urzytkownika: " +login+" "+password+", semestr: "+semester.ToString();
         }
     }
 }
