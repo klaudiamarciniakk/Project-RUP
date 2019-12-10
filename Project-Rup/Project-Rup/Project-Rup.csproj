@@ -52,11 +52,18 @@
     <Compile Include="AdmWin.Designer.cs">
       <DependentUpon>AdmWin.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataKeeper.cs" />
     <Compile Include="LoginWin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoginWin.Designer.cs">
       <DependentUpon>LoginWin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrefWin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrefWin.Designer.cs">
+      <DependentUpon>PrefWin.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,11 +73,16 @@
     <Compile Include="StudentWin.Designer.cs">
       <DependentUpon>StudentWin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Subject.cs" />
+    <Compile Include="Teacher.cs" />
     <EmbeddedResource Include="AdmWin.resx">
       <DependentUpon>AdmWin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginWin.resx">
       <DependentUpon>LoginWin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrefWin.resx">
+      <DependentUpon>PrefWin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -84,6 +96,8 @@
     <EmbeddedResource Include="StudentWin.resx">
       <DependentUpon>StudentWin.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\StudentWin.datasource" />
+    <None Include="Properties\DataSources\Teacher.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

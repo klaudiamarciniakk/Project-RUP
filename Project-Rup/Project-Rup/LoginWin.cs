@@ -19,6 +19,14 @@ namespace Project_Rup
             InitializeComponent();
         }
 
+        private void loginTextBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                connButton.PerformClick();
+            }
+        }
+
         private void connButton_Click(object sender, EventArgs e)
         {
             string connetionString, sql = "";

@@ -66,6 +66,7 @@
             this.loginTextBox2.Name = "loginTextBox2";
             this.loginTextBox2.Size = new System.Drawing.Size(100, 20);
             this.loginTextBox2.TabIndex = 3;
+            this.loginTextBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.loginTextBox2_KeyDown);
             // 
             // connButton
             // 
