@@ -34,9 +34,21 @@ namespace Project_Rup
             if (reader.HasRows)
             {
                 reader.Read();
-                StudentWin next = new StudentWin(login,password,reader.GetValue(3));
-                next.Show();
-                this.Hide();
+                string semester;
+                semester = reader.GetValue(3).ToString();
+                if (semester.CompareTo("0") != 0)
+                {
+                    StudentWin next = new StudentWin(login, password, semester);
+                    next.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    AdmWin next = new AdmWin(login, password);
+                    next.Show();
+                    this.Hide();
+                }
+               
             }
             else
             {

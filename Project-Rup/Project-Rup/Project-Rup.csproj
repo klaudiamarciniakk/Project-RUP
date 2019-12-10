@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdmWin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdmWin.Designer.cs">
+      <DependentUpon>AdmWin.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginWin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,9 @@
     <Compile Include="StudentWin.Designer.cs">
       <DependentUpon>StudentWin.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdmWin.resx">
+      <DependentUpon>AdmWin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginWin.resx">
       <DependentUpon>LoginWin.cs</DependentUpon>
     </EmbeddedResource>

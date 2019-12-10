@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace Project_Rup
 {
-    public partial class StudentWin : Form
+    public partial class AdmWin : Form
     {
-        public StudentWin(string login, string password, string semester)
+        public AdmWin(string login, string password)
         {
             InitializeComponent();
-            loginLabel.Text = "Zalogowano urzytkownika: " +login+" "+password+", semestr: "+semester;
+            loginLabel.Text = "Zalogowano administratora: " + login + " " + password;
         }
     }
 }
