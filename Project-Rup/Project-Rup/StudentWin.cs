@@ -16,7 +16,17 @@ namespace Project_Rup
         public StudentWin(string login, string password, string semester)
         {
             InitializeComponent();
-            loginLabel.Text = "Zalogowano urzytkownika: " +login+" "+password+", semestr: "+semester;
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
+            comboBox3.SelectedIndex = 0;
+            dataGridView1.Rows.Add("8.15-9.45","","");
+            dataGridView1.Rows.Add("10.00-11.30", "", "");
+            dataGridView1.Rows.Add("11.45-13.15", "", "");
+            dataGridView1.Rows.Add("13.45-15.15", "", "");
+            dataGridView1.Rows.Add("15.30-17.00", "", "");
+            dataGridView1.Rows.Add("17.15-18.45", "", "");
+            statusLabel.Text = "Status : BRAK";
+            loginLabel.Text = "Zalogowano urzytkownika : " +login+" "+password+", semestr : "+semester;
 
             string connetionString, sql = "";
             SqlConnection DBconnect;

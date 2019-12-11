@@ -48,7 +48,6 @@ namespace Project_Rup
                         }
                     }
                 }
-                MessageBox.Show(grid[0, 1].ToString());
             }
             else
             {
