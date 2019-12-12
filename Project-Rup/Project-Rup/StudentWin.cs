@@ -13,8 +13,10 @@ namespace Project_Rup
 {
     public partial class StudentWin : Form
     {
+        string Semester = "";
         public StudentWin(string login, string password, string semester)
         {
+            Semester = semester;
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
@@ -53,16 +55,33 @@ namespace Project_Rup
                 MessageBox.Show("Nie znaleźono rekordu.");
             }
             reader.Close();
-            sql = "SELECT * FROM Przedmioty WHERE Semestr LIKE '"+semester+"';";
-            command = new SqlCommand(sql, DBconnect);
-            reader = command.ExecuteReader();
+            DBconnect.Close();
+        }
+
+
+        private void prefButton_Click(object sender, EventArgs e)
+        {
+            PrefWin next = new PrefWin(DataKeeper.Teachers);
+            next.Show();
+        }
+
+        private void generateButton_Click(object sender, EventArgs e)
+        {
+            string connetionString, sql = "";
+            SqlConnection DBconnect;
+            connetionString = @"Data Source=mssql-2017.labs.wmi.amu.edu.pl;Initial Catalog=s434903_inzopr2019z;User ID=s444513;Password=Gxrbqfvw7L";
+            DBconnect = new SqlConnection(connetionString);
+            DBconnect.Open();
+            sql = "SELECT * FROM Przedmioty WHERE Semestr LIKE '" + Semester + "';";
+            SqlCommand command = new SqlCommand(sql, DBconnect);
+            SqlDataReader reader = command.ExecuteReader();
             if (reader.HasRows)
             {
                 string subjectsName, subjectsId;
                 while (reader.Read())
                 {
-                    subjectsName=reader.GetValue(1).ToString();
-                    subjectsId=reader.GetValue(0).ToString();
+                    subjectsName = reader.GetValue(1).ToString();
+                    subjectsId = reader.GetValue(0).ToString();
                     DataKeeper.Subjects.Add(new Subject(subjectsName, subjectsId));
                 }
             }
@@ -72,13 +91,7 @@ namespace Project_Rup
             }
             reader.Close();
             DBconnect.Close();
-        }
-
-
-        private void prefButton_Click(object sender, EventArgs e)
-        {
-            PrefWin next = new PrefWin(DataKeeper.Teachers);
-            next.Show();
+            Generator generator = new Generator();
         }
     }
 }

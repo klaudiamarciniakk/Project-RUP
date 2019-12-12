@@ -53,6 +53,7 @@
       <DependentUpon>AdmWin.cs</DependentUpon>
     </Compile>
     <Compile Include="DataKeeper.cs" />
+    <Compile Include="Generator.cs" />
     <Compile Include="LoginWin.cs">
       <SubType>Form</SubType>
     </Compile>
