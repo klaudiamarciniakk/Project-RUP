@@ -57,19 +57,17 @@
             // loginLabel
             // 
             this.loginLabel.AutoSize = true;
-            this.loginLabel.Location = new System.Drawing.Point(18, 14);
-            this.loginLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.loginLabel.Location = new System.Drawing.Point(12, 9);
             this.loginLabel.Name = "loginLabel";
-            this.loginLabel.Size = new System.Drawing.Size(414, 20);
+            this.loginLabel.Size = new System.Drawing.Size(281, 13);
             this.loginLabel.TabIndex = 0;
             this.loginLabel.Text = "Zalogowano użytkownika : _____________ , semestr : __";
             // 
             // prefButton
             // 
-            this.prefButton.Location = new System.Drawing.Point(18, 68);
-            this.prefButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.prefButton.Location = new System.Drawing.Point(12, 44);
             this.prefButton.Name = "prefButton";
-            this.prefButton.Size = new System.Drawing.Size(222, 43);
+            this.prefButton.Size = new System.Drawing.Size(148, 28);
             this.prefButton.TabIndex = 1;
             this.prefButton.Text = "Nadaj wagi nauczycielom";
             this.prefButton.UseVisualStyleBackColor = true;
@@ -86,10 +84,9 @@
             "od godziny 13.45",
             "od godziny 15.30",
             "od godziny 17.15"});
-            this.comboBox1.Location = new System.Drawing.Point(18, 192);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.comboBox1.Location = new System.Drawing.Point(12, 125);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(220, 28);
+            this.comboBox1.Size = new System.Drawing.Size(148, 21);
             this.comboBox1.TabIndex = 2;
             // 
             // comboBox2
@@ -97,35 +94,32 @@
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
-            "Brak ograniczeń",
-            "do godziny 17.00",
-            "do godziny 15.15",
-            "do godziny 13.15",
+            "do godziny 9.45",
             "do godziny 11.30",
-            "do godziny 9.45"});
-            this.comboBox2.Location = new System.Drawing.Point(18, 328);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            "do godziny 13.15",
+            "do godziny 15.15",
+            "do godziny 17.00",
+            "Brak ograniczeń"});
+            this.comboBox2.Location = new System.Drawing.Point(12, 213);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(220, 28);
+            this.comboBox2.Size = new System.Drawing.Size(148, 21);
             this.comboBox2.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 163);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(13, 106);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(195, 20);
+            this.label1.Size = new System.Drawing.Size(134, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Nadaj ograniczenia z dołu:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 298);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(12, 194);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(194, 20);
+            this.label2.Size = new System.Drawing.Size(132, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Nadaj ograniczenia z góry:";
             // 
@@ -139,30 +133,27 @@
             "maksymalnie 2h okienko",
             "maksymalnie 1h okienko",
             "bez okienek"});
-            this.comboBox3.Location = new System.Drawing.Point(18, 475);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.comboBox3.Location = new System.Drawing.Point(12, 309);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(220, 28);
+            this.comboBox3.Size = new System.Drawing.Size(148, 21);
             this.comboBox3.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 446);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(13, 290);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(164, 20);
+            this.label3.Size = new System.Drawing.Size(113, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "Nadaj zakres okienek:";
             // 
             // generateButton
             // 
-            this.generateButton.Location = new System.Drawing.Point(507, 54);
-            this.generateButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.generateButton.Location = new System.Drawing.Point(338, 35);
             this.generateButton.Name = "generateButton";
-            this.generateButton.Size = new System.Drawing.Size(158, 72);
+            this.generateButton.Size = new System.Drawing.Size(105, 47);
             this.generateButton.TabIndex = 8;
-            this.generateButton.Text = "Wygeneruj i wyślij";
+            this.generateButton.Text = "Wygeneruj";
             this.generateButton.UseVisualStyleBackColor = true;
             this.generateButton.Click += new System.EventHandler(this.generateButton_Click);
             // 
@@ -173,10 +164,9 @@
             this.hourColumn,
             this.saturdayColumn,
             this.sundayColumn});
-            this.dataGridView1.Location = new System.Drawing.Point(334, 163);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dataGridView1.Location = new System.Drawing.Point(223, 106);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(516, 323);
+            this.dataGridView1.Size = new System.Drawing.Size(344, 210);
             this.dataGridView1.TabIndex = 9;
             // 
             // hourColumn
@@ -200,10 +190,9 @@
             // statusLabel
             // 
             this.statusLabel.AutoSize = true;
-            this.statusLabel.Location = new System.Drawing.Point(700, 517);
-            this.statusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusLabel.Location = new System.Drawing.Point(467, 336);
             this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(149, 20);
+            this.statusLabel.Size = new System.Drawing.Size(100, 13);
             this.statusLabel.TabIndex = 10;
             this.statusLabel.Text = "Status : _________";
             this.statusLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -226,9 +215,9 @@
             // 
             // StudentWin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(918, 591);
+            this.ClientSize = new System.Drawing.Size(612, 384);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.generateButton);
@@ -240,7 +229,6 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.prefButton);
             this.Controls.Add(this.loginLabel);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "StudentWin";
             this.Text = "Generator-Student";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

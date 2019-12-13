@@ -19,7 +19,7 @@ namespace Project_Rup
             Semester = semester;
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
-            comboBox2.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 5;
             comboBox3.SelectedIndex = 0;
             dataGridView1.Rows.Add("8.15-9.45","","");
             dataGridView1.Rows.Add("10.00-11.30", "", "");
@@ -91,7 +91,19 @@ namespace Project_Rup
             }
             reader.Close();
             DBconnect.Close();
-            Generator generator = new Generator();
+            Generator generator = new Generator(comboBox1.SelectedIndex,comboBox2.SelectedIndex,comboBox3.SelectedIndex);
+            dataGridView1[1, 0].Value = DataKeeper.Plan[0, 0];
+            dataGridView1[1, 1].Value = DataKeeper.Plan[0, 1];
+            dataGridView1[1, 2].Value = DataKeeper.Plan[0, 2];
+            dataGridView1[1, 3].Value = DataKeeper.Plan[0, 3];
+            dataGridView1[1, 4].Value = DataKeeper.Plan[0, 4];
+            dataGridView1[1, 5].Value = DataKeeper.Plan[0, 5];
+            dataGridView1[2, 0].Value = DataKeeper.Plan[1, 0];
+            dataGridView1[2, 1].Value = DataKeeper.Plan[1, 1];
+            dataGridView1[2, 2].Value = DataKeeper.Plan[1, 2];
+            dataGridView1[2, 3].Value = DataKeeper.Plan[1, 3];
+            dataGridView1[2, 4].Value = DataKeeper.Plan[1, 4];
+            dataGridView1[2, 5].Value = DataKeeper.Plan[1, 5];
         }
     }
 }
