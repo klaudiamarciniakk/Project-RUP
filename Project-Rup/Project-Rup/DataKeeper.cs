@@ -10,8 +10,11 @@ namespace Project_Rup
     {
         static List<Subject> subjects = new List<Subject>();
         static List<Teacher> teachers = new List<Teacher>();
+        static int[,] plan = new int[2, 6];
 
         public static List<Teacher> Teachers { get => teachers; set => teachers = value; }
         public static List<Subject> Subjects { get => subjects; set => subjects = value; }
+        public static int[,] Plan { get => plan; set => plan = value; }
+
     }
 }

@@ -54,7 +54,7 @@
             this.PrefColumn});
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(557, 344);
+            this.dataGridView1.Size = new System.Drawing.Size(445, 344);
             this.dataGridView1.TabIndex = 1;
             // 
             // IdColumn
@@ -94,7 +94,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(211, 415);
+            this.saveButton.Location = new System.Drawing.Point(166, 386);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(123, 42);
             this.saveButton.TabIndex = 2;
@@ -106,11 +106,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 530);
+            this.ClientSize = new System.Drawing.Size(469, 457);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.dataGridView1);
             this.Name = "PrefWin";
-            this.Text = "PrefWin";
+            this.Text = "Wagi";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teacherBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentWinBindingSource)).EndInit();

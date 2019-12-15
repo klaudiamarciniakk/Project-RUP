@@ -36,19 +36,18 @@ namespace Project_Rup
                     day = reader.GetInt32(3)-6;
                     hour = reader.GetInt32(4)-1;
                     teacherId = reader.GetInt32(2);
-                    if (grid[day, hour] == 0)
+                    if (Grid[day, hour] == 0)
                     {
-                        grid[day, hour] = teacherId;
+                        Grid[day, hour] = teacherId;
                     }
                     else
                     {
-                        if(DataKeeper.Teachers.Where(i => i.Id==grid[day,hour]).FirstOrDefault().Pref> DataKeeper.Teachers.Where(i => i.Id == teacherId).FirstOrDefault().Pref)
+                        if(DataKeeper.Teachers.Where(i => i.Id==Grid[day,hour]).FirstOrDefault().Pref> DataKeeper.Teachers.Where(i => i.Id == teacherId).FirstOrDefault().Pref)
                         {
-                            grid[day, hour] = teacherId;
+                            Grid[day, hour] = teacherId;
                         }
                     }
                 }
-                MessageBox.Show(grid[0, 1].ToString());
             }
             else
             {
@@ -59,5 +58,6 @@ namespace Project_Rup
         }
         public string Name { get => name; set => name = value; }
         public string Id { get => id; set => id = value; }
+        public int[,] Grid { get => grid; set => grid = value; }
     }
 }
