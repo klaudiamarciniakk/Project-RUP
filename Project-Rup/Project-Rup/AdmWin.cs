@@ -91,14 +91,74 @@ namespace Project_Rup
 
                 }
             }
-            
+
         }
-        
 
+        private void tabela1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string connetionString, sql = "";
+            SqlConnection DBconnect;
+            connetionString = @"Data Source=mssql-2017.labs.wmi.amu.edu.pl;Initial Catalog=s434903_inzopr2019z;User ID=s444513;Password=Gxrbqfvw7L";
+            var senderGrid = (DataGridView)sender;
+            
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.ColumnIndex == 2)
+            {var wartośćKonkretnejKomórki = senderGrid.Rows[e.RowIndex].Cells[0].Value;
+                String[] name = wartośćKonkretnejKomórki.ToString().Split(' ');
+                Console.WriteLine(name[0] + " " + name[1]);
+                DBconnect = new SqlConnection(connetionString);
+                DBconnect.Open();
+                sql = "select Id from Studenci where Imie ='"+ name[0]+"' and Nazwisko ='"+name[1]+"'";
+                SqlCommand command3 = new SqlCommand(sql, DBconnect);
+                SqlDataReader reader3 = command3.ExecuteReader();
+                if (reader3.HasRows)
+                {
+                    reader3.Read();
+                    string id;
+                    id = reader3.GetValue(0).ToString();
+                    DBconnect = new SqlConnection(connetionString);
+                    DBconnect.Open();
+                    sql = "update Plan_Zajec set status = 'zatwierdzony' where Studenci_Id ="+id;
+                    SqlCommand command4 = new SqlCommand(sql, DBconnect);
+                    SqlDataReader reader4 = command4.ExecuteReader();
+                    MessageBox.Show("Zaakceptowano pomyślnie");
+                    AdmWin next = new AdmWin("Admin", "Admin");
+                    next.Show();
+                    this.Hide();
+
+                }
+            }
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.ColumnIndex == 3)
+            {
+                Console.WriteLine("przycisnieto prycisk odmowy");
+                var wartośćKonkretnejKomórki = senderGrid.Rows[e.RowIndex].Cells[0].Value;
+                String[] name = wartośćKonkretnejKomórki.ToString().Split(' ');
+                Console.WriteLine(name[0] + " " + name[1]);
+                DBconnect = new SqlConnection(connetionString);
+                DBconnect.Open();
+                sql = "select Id from Studenci where Imie ='" + name[0] + "' and Nazwisko ='" + name[1] + "'";
+                SqlCommand command5 = new SqlCommand(sql, DBconnect);
+                SqlDataReader reader5 = command5.ExecuteReader();
+                if (reader5.HasRows)
+                {
+                    reader5.Read();
+                    string id;
+                    id = reader5.GetValue(0).ToString();
+                    DBconnect = new SqlConnection(connetionString);
+                    DBconnect.Open();
+                    sql = "update Plan_Zajec set status = 'odrzucony' where Studenci_Id =" + id;
+                    SqlCommand command6 = new SqlCommand(sql, DBconnect);
+                    SqlDataReader reader6 = command6.ExecuteReader();
+                    MessageBox.Show("Odrzucono pomyślnie");
+                    AdmWin next = new AdmWin("Admin", "Admin");
+                    next.Show();
+                    this.Hide();
+                }
+            }
+        }
+
+       
     }
-    //private void accept_Click(object sender, EventArgs e)
-       // {
+    
 
-
-     //   }
 }
