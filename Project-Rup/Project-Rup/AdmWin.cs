@@ -96,9 +96,9 @@ namespace Project_Rup
         
 
     }
-    private void accept_Click(object sender, EventArgs e)
-        {
+    //private void accept_Click(object sender, EventArgs e)
+       // {
 
 
-        }
+     //   }
 }
