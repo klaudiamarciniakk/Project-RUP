@@ -129,10 +129,13 @@
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Items.AddRange(new object[] {
             "Brak ograniczeń",
-            "maksymalnie 3h okienko",
-            "maksymalnie 2h okienko",
-            "maksymalnie 1h okienko",
-            "bez okienek"});
+            "maksymalnie 1h okien",
+            "maksymalnie 2h okien",
+            "maksymalnie 3h okien",
+            "maksymalnie 4h okien",
+            "maksymalnie 5h okien",
+            "maksymalnie 6h okien",
+            "bez okien"});
             this.comboBox3.Location = new System.Drawing.Point(12, 309);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(148, 21);
