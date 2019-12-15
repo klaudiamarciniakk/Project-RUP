@@ -71,7 +71,7 @@
             this.tabela1.RowHeadersWidth = 51;
             this.tabela1.Size = new System.Drawing.Size(787, 288);
             this.tabela1.TabIndex = 2;
-            
+            this.tabela1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tabela1_CellContentClick);
             // 
             // idStudentColumn
             // 
@@ -94,16 +94,14 @@
             this.accept.MinimumWidth = 6;
             this.accept.Name = "accept";
             this.accept.Text = "Zaakceptuj";
-            this.accept.Visible = true;
             this.accept.Width = 125;
-            //
+            // 
             // reject
-            //
+            // 
             this.reject.HeaderText = "Odrzucenie";
             this.reject.MinimumWidth = 6;
             this.reject.Name = "reject";
             this.reject.Text = "Odrzuć";
-            this.reject.Visible = true;
             this.reject.Width = 125;
             // 
             // AdmWin
@@ -117,6 +115,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AdmWin";
             this.Text = "AdmWin";
+            
             ((System.ComponentModel.ISupportInitialize)(this.tabela1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
