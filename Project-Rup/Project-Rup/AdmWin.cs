@@ -100,11 +100,39 @@ namespace Project_Rup
             SqlConnection DBconnect;
             connetionString = @"Data Source=mssql-2017.labs.wmi.amu.edu.pl;Initial Catalog=s434903_inzopr2019z;User ID=s444513;Password=Gxrbqfvw7L";
             var senderGrid = (DataGridView)sender;
+
+            if(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.ColumnIndex == 4)
+            {
+                
+
+                var wartośćKonkretnejKomórki = senderGrid.Rows[e.RowIndex].Cells[0].Value;
+                String[] name = wartośćKonkretnejKomórki.ToString().Split(' ');
+                DBconnect = new SqlConnection(connetionString);
+                DBconnect.Open();
+                sql = "select Id from Studenci where Imie ='" + name[0] + "' and Nazwisko ='" + name[1] + "'";
+                SqlCommand command6 = new SqlCommand(sql, DBconnect);
+                SqlDataReader reader6 = command6.ExecuteReader();
+                if (reader6.HasRows)
+                {
+                    reader6.Read();
+                    string id;
+                    id = reader6.GetValue(0).ToString();
+
+                    PreviewShedule next = new PreviewShedule(id);
+                    next.Show();
+
+                    
+
+
+
+
+                }
+            }
             
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.ColumnIndex == 2)
             {var wartośćKonkretnejKomórki = senderGrid.Rows[e.RowIndex].Cells[0].Value;
                 String[] name = wartośćKonkretnejKomórki.ToString().Split(' ');
-                Console.WriteLine(name[0] + " " + name[1]);
+                //Console.WriteLine(name[0] + " " + name[1]);
                 DBconnect = new SqlConnection(connetionString);
                 DBconnect.Open();
                 sql = "select Id from Studenci where Imie ='"+ name[0]+"' and Nazwisko ='"+name[1]+"'";
@@ -133,7 +161,7 @@ namespace Project_Rup
                 Console.WriteLine("przycisnieto prycisk odmowy");
                 var wartośćKonkretnejKomórki = senderGrid.Rows[e.RowIndex].Cells[0].Value;
                 String[] name = wartośćKonkretnejKomórki.ToString().Split(' ');
-                Console.WriteLine(name[0] + " " + name[1]);
+               // Console.WriteLine(name[0] + " " + name[1]);
                 DBconnect = new SqlConnection(connetionString);
                 DBconnect.Open();
                 sql = "select Id from Studenci where Imie ='" + name[0] + "' and Nazwisko ='" + name[1] + "'";

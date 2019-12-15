@@ -53,6 +53,12 @@
       <DependentUpon>AdmWin.cs</DependentUpon>
     </Compile>
     <Compile Include="DataKeeper.cs" />
+    <Compile Include="PreviewShedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewShedule.Designer.cs">
+      <DependentUpon>PreviewShedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Generator.cs" />
     <Compile Include="LoginWin.cs">
       <SubType>Form</SubType>
@@ -84,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PrefWin.resx">
       <DependentUpon>PrefWin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreviewShedule.resx">
+      <DependentUpon>PreviewShedule.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

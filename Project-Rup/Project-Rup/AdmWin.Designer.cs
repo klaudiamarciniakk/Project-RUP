@@ -35,6 +35,7 @@
             this.sheduleStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.accept = new System.Windows.Forms.DataGridViewButtonColumn();
             this.reject = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.seeShedule = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.tabela1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,12 +65,13 @@
             this.idStudentColumn,
             this.sheduleStatus,
             this.accept,
-            this.reject});
+            this.reject,
+            this.seeShedule});
             this.tabela1.Location = new System.Drawing.Point(41, 112);
             this.tabela1.Margin = new System.Windows.Forms.Padding(4);
             this.tabela1.Name = "tabela1";
             this.tabela1.RowHeadersWidth = 51;
-            this.tabela1.Size = new System.Drawing.Size(787, 288);
+            this.tabela1.Size = new System.Drawing.Size(685, 288);
             this.tabela1.TabIndex = 2;
             this.tabela1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tabela1_CellContentClick);
             // 
@@ -103,7 +105,15 @@
             this.reject.Name = "reject";
             this.reject.Text = "Odrzuć";
             this.reject.Width = 125;
+            //
+            // seeShedule
             // 
+            this.seeShedule.HeaderText = "Podgląd planu";
+            this.seeShedule.MinimumWidth = 6;
+            this.seeShedule.Name = "seeShedule";
+            this.seeShedule.Text = "Zobacz plan";
+            this.seeShedule.Width = 125;
+            //
             // AdmWin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -115,7 +125,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AdmWin";
             this.Text = "AdmWin";
-            
             ((System.ComponentModel.ISupportInitialize)(this.tabela1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -131,5 +140,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sheduleStatus;
         private System.Windows.Forms.DataGridViewButtonColumn accept;
         private System.Windows.Forms.DataGridViewButtonColumn reject;
+        private System.Windows.Forms.DataGridViewButtonColumn seeShedule;
     }
 }
