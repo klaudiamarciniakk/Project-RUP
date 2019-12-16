@@ -153,7 +153,7 @@
             // 
             // generateButton
             // 
-            this.generateButton.Location = new System.Drawing.Point(338, 35);
+            this.generateButton.Location = new System.Drawing.Point(272, 35);
             this.generateButton.Name = "generateButton";
             this.generateButton.Size = new System.Drawing.Size(105, 47);
             this.generateButton.TabIndex = 8;
@@ -203,9 +203,9 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(232, 336);
+            this.saveButton.Location = new System.Drawing.Point(422, 35);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(145, 36);
+            this.saveButton.Size = new System.Drawing.Size(118, 47);
             this.saveButton.TabIndex = 11;
             this.saveButton.Text = "Zapisz";
             this.saveButton.UseVisualStyleBackColor = true;

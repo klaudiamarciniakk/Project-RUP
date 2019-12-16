@@ -28,7 +28,7 @@ namespace Project_Rup
             dataGridView1.Rows.Add("15.30-17.00", "", "");
             dataGridView1.Rows.Add("17.15-18.45", "", "");
             statusLabel.Text = "Status : BRAK";
-            loginLabel.Text = "Zalogowano urzytkownika : " + login + " " + password + " , semestr : " + semester;
+            loginLabel.Text = "Zalogowano uzytkownika : " + login + " " + password + " , semestr : " + semester;
             string connetionString, sql = "";
             SqlConnection DBconnect;
             connetionString = @"Data Source=mssql-2017.labs.wmi.amu.edu.pl;Initial Catalog=s434903_inzopr2019z;User ID=s444513;Password=Gxrbqfvw7L";
@@ -115,36 +115,38 @@ namespace Project_Rup
                     }
 
                 }
-            }
-            if (!reader0.HasRows)
-            {
 
-
-                
-                connetionString = @"Data Source=mssql-2017.labs.wmi.amu.edu.pl;Initial Catalog=s434903_inzopr2019z;User ID=s444513;Password=Gxrbqfvw7L";
-                DBconnect = new SqlConnection(connetionString);
-                DBconnect.Open();
-                sql = "Select DISTINCT prowadzacy.imie, prowadzacy.nazwisko, prowadzacy.Id from prowadzacy,zajecia,Przedmioty where zajecia.Id_Prowadzacego=Prowadzacy.Id and zajecia.Id_Przedmiotu=Przedmioty.Id and Przedmioty.Semestr='" + semester + "' order by Nazwisko";
-                SqlCommand command = new SqlCommand(sql, DBconnect);
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
+                if (!reader01.HasRows)
                 {
-                    string teacherName, teacherSurname;
-                    int teacherId;
-                    while (reader.Read())
+
+
+
+
+                    connetionString = @"Data Source=mssql-2017.labs.wmi.amu.edu.pl;Initial Catalog=s434903_inzopr2019z;User ID=s444513;Password=Gxrbqfvw7L";
+                    DBconnect = new SqlConnection(connetionString);
+                    DBconnect.Open();
+                    sql = "Select DISTINCT prowadzacy.imie, prowadzacy.nazwisko, prowadzacy.Id from prowadzacy,zajecia,Przedmioty where zajecia.Id_Prowadzacego=Prowadzacy.Id and zajecia.Id_Przedmiotu=Przedmioty.Id and Przedmioty.Semestr='" + semester + "' order by Nazwisko";
+                    SqlCommand command = new SqlCommand(sql, DBconnect);
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        teacherName = reader.GetValue(0).ToString();
-                        teacherSurname = reader.GetValue(1).ToString();
-                        teacherId = reader.GetInt32(2);
-                        DataKeeper.Teachers.Add(new Teacher(teacherName, teacherSurname, teacherId));
+                        string teacherName, teacherSurname;
+                        int teacherId;
+                        while (reader.Read())
+                        {
+                            teacherName = reader.GetValue(0).ToString();
+                            teacherSurname = reader.GetValue(1).ToString();
+                            teacherId = reader.GetInt32(2);
+                            DataKeeper.Teachers.Add(new Teacher(teacherName, teacherSurname, teacherId));
+                        }
                     }
+                    else
+                    {
+                        MessageBox.Show("Nie znaleźono rekordu.");
+                    }
+                    reader.Close();
+                    DBconnect.Close();
                 }
-                else
-                {
-                    MessageBox.Show("Nie znaleźono rekordu.");
-                }
-                reader.Close();
-                DBconnect.Close();
             }
 
         }
