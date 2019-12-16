@@ -33,11 +33,10 @@ namespace Project_Rup
 
             while (reader.Read())
             {
-
                 counter++;
                 //wyczytuje ile jest wierszy w stworzonej tabeli
             }
-            // Console.WriteLine("Ilosc wierszy: " +counter); 
+            // Console.WriteLine("Ilosc wierszy: " +counter);
             DBconnect = new SqlConnection(connetionString);
             DBconnect.Open();
             sql = "SELECT * FROM Plan_Zajec WHERE Status LIKE 'Oczekujący'";
@@ -49,18 +48,13 @@ namespace Project_Rup
             {
                 for (int i = 1; i <= counter; i++)
                 {
-
                     reader1.Read();
                     string id_studenta;
                     id_studenta = reader1.GetValue(1).ToString();
 
                     // Console.WriteLine("id studenta: " + id_studenta);
 
-
                     //  Console.WriteLine("wielkosc listy: " + uzyteid.Count);
-
-
-
 
                     if (!uzyteid.Contains(id_studenta))
                     {
@@ -82,16 +76,11 @@ namespace Project_Rup
                             //Console.WriteLine(name + " " + surname);
 
                             string status = "oczekujący";
-                            tabela1.Rows.Add(name + " " + surname, status, "Zaakceptuj", "Odrzuć", "Podgląd" );
-
-
+                            tabela1.Rows.Add(name + " " + surname, status, "Zaakceptuj", "Odrzuć", "Podgląd");
                         }
-
                     }
-
                 }
             }
-
         }
 
         private void tabela1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -101,7 +90,7 @@ namespace Project_Rup
             connetionString = @"Data Source=mssql-2017.labs.wmi.amu.edu.pl;Initial Catalog=s434903_inzopr2019z;User ID=s444513;Password=Gxrbqfvw7L";
             var senderGrid = (DataGridView)sender;
 
-            if(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.ColumnIndex == 4)
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.ColumnIndex == 4)
             {
                 var wartośćKonkretnejKomórki = senderGrid.Rows[e.RowIndex].Cells[0].Value;
                 String[] name = wartośćKonkretnejKomórki.ToString().Split(' ');
@@ -120,14 +109,15 @@ namespace Project_Rup
                     shedule.Show();
                 }
             }
-            
+
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.ColumnIndex == 2)
-            {var wartośćKonkretnejKomórki = senderGrid.Rows[e.RowIndex].Cells[0].Value;
+            {
+                var wartośćKonkretnejKomórki = senderGrid.Rows[e.RowIndex].Cells[0].Value;
                 String[] name = wartośćKonkretnejKomórki.ToString().Split(' ');
                 //Console.WriteLine(name[0] + " " + name[1]);
                 DBconnect = new SqlConnection(connetionString);
                 DBconnect.Open();
-                sql = "select Id from Studenci where Imie ='"+ name[0]+"' and Nazwisko ='"+name[1]+"'";
+                sql = "select Id from Studenci where Imie ='" + name[0] + "' and Nazwisko ='" + name[1] + "'";
                 SqlCommand command3 = new SqlCommand(sql, DBconnect);
                 SqlDataReader reader3 = command3.ExecuteReader();
                 if (reader3.HasRows)
@@ -137,14 +127,14 @@ namespace Project_Rup
                     id = reader3.GetValue(0).ToString();
                     DBconnect = new SqlConnection(connetionString);
                     DBconnect.Open();
-                    sql = "update Plan_Zajec set status = 'zatwierdzony' where Studenci_Id ="+id;
+                    sql = "update Plan_Zajec set status = 'zatwierdzony' where Studenci_Id =" + id;
                     SqlCommand command4 = new SqlCommand(sql, DBconnect);
-                    SqlDataReader reader4 = command4.ExecuteReader();
+
+                    //SqlDataReader reader4 = command4.ExecuteReader();
                     MessageBox.Show("Zaakceptowano pomyślnie");
                     AdmWin next = new AdmWin("Admin", "Admin");
                     next.Show();
                     this.Hide();
-
                 }
             }
 
@@ -153,7 +143,7 @@ namespace Project_Rup
                 Console.WriteLine("przycisnieto przycisk odmowy");
                 var wartośćKonkretnejKomórki = senderGrid.Rows[e.RowIndex].Cells[0].Value;
                 String[] name = wartośćKonkretnejKomórki.ToString().Split(' ');
-               // Console.WriteLine(name[0] + " " + name[1]);
+                // Console.WriteLine(name[0] + " " + name[1]);
                 DBconnect = new SqlConnection(connetionString);
                 DBconnect.Open();
                 sql = "select Id from Studenci where Imie ='" + name[0] + "' and Nazwisko ='" + name[1] + "'";
@@ -168,7 +158,7 @@ namespace Project_Rup
                     DBconnect.Open();
                     sql = "delete Plan_Zajec where Studenci_Id =" + id;
                     SqlCommand command6 = new SqlCommand(sql, DBconnect);
-                    SqlDataReader reader6 = command6.ExecuteReader();
+                    //SqlDataReader reader6 = command6.ExecuteReader();
                     MessageBox.Show("Odrzucono pomyślnie");
                     AdmWin next = new AdmWin("Admin", "Admin");
                     next.Show();
@@ -176,9 +166,5 @@ namespace Project_Rup
                 }
             }
         }
-
-       
     }
-    
-
 }

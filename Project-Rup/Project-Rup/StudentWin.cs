@@ -13,7 +13,8 @@ namespace Project_Rup
 {
     public partial class StudentWin : Form
     {
-        string Semester = "";
+        private string Semester = "";
+
         public StudentWin(string login, string password, string semester)
         {
             Semester = semester;
@@ -69,11 +70,12 @@ namespace Project_Rup
                     SqlDataReader reader02 = command02.ExecuteReader();
                     if (reader02.HasRows)
                     {
-                        for (int i = 1; i <= 4; i++)
+                        for (int i = 0; i <= 3; i++)
                         {
                             reader02.Read();
                             string id_zajec;
                             id_zajec = reader02.GetValue(0).ToString();
+                            Console.WriteLine(id_zajec);
                             DBconnect = new SqlConnection(connetionString);
                             DBconnect.Open();
                             sql = "select Id_przedmiotu, Id_dnia, Id_Godziny  from Zajecia where Id =" + id_zajec;
@@ -88,6 +90,7 @@ namespace Project_Rup
                                 id_przedmiotu = reader03.GetValue(0).ToString();
                                 dzien = reader03.GetValue(1).ToString();
                                 godzina = reader03.GetValue(2).ToString();
+                                Console.WriteLine("idprzedmiotu " + id_przedmiotu + " dzien " + dzien + " godzina " + godzina);
                                 int h = Convert.ToInt32(godzina);
                                 DBconnect = new SqlConnection(connetionString);
                                 DBconnect.Open();
@@ -109,19 +112,19 @@ namespace Project_Rup
                                         dataGridView1.Rows[h - 1].Cells[2].Value = nazwa;
                                     }
                                 }
-
+                                reader04.Close();
+                                DBconnect.Close();
                             }
+                            reader03.Close();
+                            DBconnect.Close();
                         }
                     }
-
+                    reader02.Close();
+                    DBconnect.Close();
                 }
 
                 if (!reader01.HasRows)
                 {
-
-
-
-
                     connetionString = @"Data Source=mssql-2017.labs.wmi.amu.edu.pl;Initial Catalog=s434903_inzopr2019z;User ID=s444513;Password=Gxrbqfvw7L";
                     DBconnect = new SqlConnection(connetionString);
                     DBconnect.Open();
@@ -147,9 +150,13 @@ namespace Project_Rup
                     reader.Close();
                     DBconnect.Close();
                 }
+                reader01.Close();
+                DBconnect.Close();
             }
-
+            reader0.Close();
+            DBconnect.Close();
         }
+
         private void prefButton_Click(object sender, EventArgs e)
         {
             PrefWin next = new PrefWin(DataKeeper.Teachers);
@@ -182,7 +189,7 @@ namespace Project_Rup
             }
             reader.Close();
             DBconnect.Close();
-            Generator generator = new Generator(comboBox1.SelectedIndex,comboBox2.SelectedIndex,comboBox3.SelectedIndex);
+            Generator generator = new Generator(comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox3.SelectedIndex);
             dataGridView1[1, 0].Value = DataKeeper.Plan[0, 0];
             dataGridView1[1, 1].Value = DataKeeper.Plan[0, 1];
             dataGridView1[1, 2].Value = DataKeeper.Plan[0, 2];
@@ -198,7 +205,7 @@ namespace Project_Rup
 
             for (int i = 0; i <= 1; i++)
             {
-                for(int j = 0; j <= 5; j++)
+                for (int j = 0; j <= 5; j++)
                 {
                     string id_nauczyciela;
                     id_nauczyciela = DataKeeper.Plan[i, j].ToString();
@@ -223,14 +230,16 @@ namespace Project_Rup
                             string nazwa;
                             nazwa = reader2.GetValue(0).ToString();
                             dataGridView1[i + 1, j].Value = nazwa;
-                            
                         }
+                        reader2.Close();
+                        DBconnect.Close();
                     }
+                    reader1.Close();
+                    DBconnect.Close();
                 }
             }
 
-            saveButton.Visible=true;
-
+            saveButton.Visible = true;
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -240,7 +249,6 @@ namespace Project_Rup
             string nazwisko;
             imie = pom[3];
             nazwisko = pom[4];
-
 
             string connetionString, sql = "";
             SqlConnection DBconnect;
@@ -256,38 +264,51 @@ namespace Project_Rup
 
                 string id_studenta;
                 id_studenta = reader.GetValue(0).ToString();
-            
 
-            for (int i = 0; i <= 1; i++)
-            {
-                for (int j = 0; j <= 5; j++)
+                for (int i = 0; i <= 1; i++)
                 {
-                    string id_przedmiotu;
-                    id_przedmiotu = DataKeeper.Plan[i, j].ToString();
-                    Console.WriteLine(DataKeeper.Plan[i, j]);
-                    if (id_przedmiotu != "0")
+                    for (int j = 0; j <= 5; j++)
                     {
-                        DBconnect = new SqlConnection(connetionString);
-                        DBconnect.Open();
-                        sql = "SELECT Id FROM Zajecia WHERE Id_Przedmiotu ='" + id_przedmiotu + "';";
-                        SqlCommand command1 = new SqlCommand(sql, DBconnect);
-                        SqlDataReader reader1 = command1.ExecuteReader();
-                        if (reader1.HasRows)
+                        string id_nauczyciela;
+                        id_nauczyciela = DataKeeper.Plan[i, j].ToString();
+                        if (id_nauczyciela == "0")
                         {
-                            reader1.Read();
-                            string id_zajec;
-                            id_zajec = reader1.GetValue(0).ToString();
-                                
+                            continue;
+                        }
+                        else
+                        {
+                            int godzina = j + 1;
+                            int dzien = i + 6;
+                            godzina.ToString();
+                            dzien.ToString();
                             DBconnect = new SqlConnection(connetionString);
                             DBconnect.Open();
-                            sql = "insert into Plan_Zajec (Zajecia_Id, Studenci_Id, Status) values (" + id_zajec + ", " + id_studenta + ", 'oczekujący')";
+                            sql = "SELECT Id_Przedmiotu, Id FROM Zajecia WHERE Id_Dnia=" + dzien + " and Id_Godziny=" + godzina + " and Id_Prowadzacego=" + id_nauczyciela;
                             SqlCommand command2 = new SqlCommand(sql, DBconnect);
+                            Console.WriteLine(id_nauczyciela);
                             SqlDataReader reader2 = command2.ExecuteReader();
-                                
+                            if (reader2.HasRows)
+                            {
+                                reader2.Read();
+                                string id_przedmiotu;
+                                string id_zajec;
+                                id_przedmiotu = reader2.GetValue(0).ToString();
+                                id_zajec = reader2.GetValue(1).ToString();
+                                Console.WriteLine(DataKeeper.Plan[i, j]);
+                                if (id_przedmiotu != "0")
+                                {
+                                    DBconnect = new SqlConnection(connetionString);
+                                    DBconnect.Open();
+                                    sql = "insert into Plan_Zajec (Zajecia_Id, Studenci_Id, Status) values (" + id_zajec + ", " + id_studenta + ", 'oczekujący')";
+                                    SqlCommand command4 = new SqlCommand(sql, DBconnect);
+                                    SqlDataReader reader4 = command4.ExecuteReader();
+                                }
                             }
+                            reader2.Close();
+                            DBconnect.Close();
+                        }
                     }
                 }
-            }
                 DBconnect = new SqlConnection(connetionString);
                 DBconnect.Open();
                 sql = "SELECT Status FROM Plan_Zajec WHERE Studenci_Id ='" + id_studenta + "';";
@@ -300,15 +321,20 @@ namespace Project_Rup
                     status = reader3.GetValue(0).ToString();
                     statusLabel.Text = " Status: " + status;
                 }
+                reader3.Close();
+                DBconnect.Close();
 
                 MessageBox.Show("Zapisano plan");
-                
-                                saveButton.Enabled = false;
-                                generateButton.Enabled = false;
-        }
-           
-        }
 
-        
+                saveButton.Enabled = false;
+                generateButton.Enabled = false;
+                prefButton.Enabled = false;
+                comboBox1.Enabled = false;
+                comboBox2.Enabled = false;
+                comboBox3.Enabled = false;
+            }
+            reader.Close();
+            DBconnect.Close();
+        }
     }
 }
