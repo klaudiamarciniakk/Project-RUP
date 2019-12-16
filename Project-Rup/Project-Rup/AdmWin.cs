@@ -130,7 +130,7 @@ namespace Project_Rup
                     sql = "update Plan_Zajec set status = 'zatwierdzony' where Studenci_Id =" + id;
                     SqlCommand command4 = new SqlCommand(sql, DBconnect);
 
-                    //SqlDataReader reader4 = command4.ExecuteReader();
+                    SqlDataReader reader4 = command4.ExecuteReader();
                     MessageBox.Show("Zaakceptowano pomyślnie");
                     AdmWin next = new AdmWin("Admin", "Admin");
                     next.Show();
@@ -158,7 +158,7 @@ namespace Project_Rup
                     DBconnect.Open();
                     sql = "delete Plan_Zajec where Studenci_Id =" + id;
                     SqlCommand command6 = new SqlCommand(sql, DBconnect);
-                    //SqlDataReader reader6 = command6.ExecuteReader();
+                    SqlDataReader reader6 = command6.ExecuteReader();
                     MessageBox.Show("Odrzucono pomyślnie");
                     AdmWin next = new AdmWin("Admin", "Admin");
                     next.Show();
