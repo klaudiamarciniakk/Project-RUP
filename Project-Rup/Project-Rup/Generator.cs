@@ -192,6 +192,10 @@ namespace Project_Rup
                             break;
                     }
                     generatedPlan.Add(prefSum);
+                    if(generatedPlan.Count!=DataKeeper.Subjects.Count+1)
+                    {
+                        goto forOut;
+                    }
                     allPlans.Add(generatedPlan.ToList());
                     generatedPlan.RemoveAt(generatedPlan.IndexOf(generatedPlan.Last()));
                     for (int j = 0; j < 6; j++)
@@ -416,6 +420,8 @@ namespace Project_Rup
                     }
                 }
             }
+        forOut:
+            allPlans.RemoveAt(allPlans.IndexOf(allPlans.Last()));
             pom = allPlans[0].Last();
             generatedPlan = allPlans[0];
             for (int i = 1; i < allPlans.Count; i++)
@@ -430,16 +436,28 @@ namespace Project_Rup
             noGrid = new int[2, 6];
             for (int i = 0; i < generatedPlan.Count; i++)
             {
-                for (int j = 0; j < 6; j++)
+                for (int k = 0; k < DataKeeper.Subjects.Count; k++)
                 {
-                    if(generatedPlan[i]==DataKeeper.Subjects[i].Grid[0,j])
+                    int pom5 = 0;
+
+                    for (int j = 0; j < 6; j++)
                     {
-                        noGrid[0, j] = generatedPlan[i];
-                        break;
+                        if (generatedPlan[i] == DataKeeper.Subjects[k].Grid[0, j]&&noGrid[0,j]==0)
+                        {
+                            noGrid[0, j] = generatedPlan[i];
+                            pom5++;
+                            break;
+                        }
+                        if (generatedPlan[i] == DataKeeper.Subjects[k].Grid[1, j] && noGrid[0, j] == 0)
+                        {
+                            noGrid[1, j] = generatedPlan[i];
+                            pom5++;
+                            break;
+                        }
+
                     }
-                    if (generatedPlan[i] == DataKeeper.Subjects[i].Grid[1, j])
+                    if(pom5!=0)
                     {
-                        noGrid[1, j] = generatedPlan[i];
                         break;
                     }
                 }
