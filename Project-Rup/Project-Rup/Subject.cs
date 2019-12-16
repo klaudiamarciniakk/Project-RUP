@@ -30,21 +30,25 @@ namespace Project_Rup
             SqlDataReader reader = command.ExecuteReader();
             if (reader.HasRows)
             {
-                int day, hour, teacherId;
+                int day, hour, teacherId,space;
                 while (reader.Read())
                 {
                     day = reader.GetInt32(3)-6;
                     hour = reader.GetInt32(4)-1;
                     teacherId = reader.GetInt32(2);
-                    if (Grid[day, hour] == 0)
+                    space = reader.GetInt32(5);
+                    if (space > 0)
                     {
-                        Grid[day, hour] = teacherId;
-                    }
-                    else
-                    {
-                        if(DataKeeper.Teachers.Where(i => i.Id==Grid[day,hour]).FirstOrDefault().Pref> DataKeeper.Teachers.Where(i => i.Id == teacherId).FirstOrDefault().Pref)
+                        if (Grid[day, hour] == 0)
                         {
                             Grid[day, hour] = teacherId;
+                        }
+                        else
+                        {
+                            if (DataKeeper.Teachers.Where(i => i.Id == Grid[day, hour]).FirstOrDefault().Pref > DataKeeper.Teachers.Where(i => i.Id == teacherId).FirstOrDefault().Pref)
+                            {
+                                Grid[day, hour] = teacherId;
+                            }
                         }
                     }
                 }
