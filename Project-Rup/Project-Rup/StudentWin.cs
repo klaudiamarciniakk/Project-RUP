@@ -28,7 +28,7 @@ namespace Project_Rup
             dataGridView1.Rows.Add("15.30-17.00", "", "");
             dataGridView1.Rows.Add("17.15-18.45", "", "");
             statusLabel.Text = "Status : BRAK";
-            loginLabel.Text = "Zalogowano urzytkownika : " +login+" "+password+", semestr : "+semester;
+            loginLabel.Text = "Zalogowano urzytkownika : " +login+" "+password+" , semestr : "+semester;
 
             string connetionString, sql = "";
             SqlConnection DBconnect;
@@ -104,6 +104,107 @@ namespace Project_Rup
             dataGridView1[2, 3].Value = DataKeeper.Plan[1, 3];
             dataGridView1[2, 4].Value = DataKeeper.Plan[1, 4];
             dataGridView1[2, 5].Value = DataKeeper.Plan[1, 5];
+
+            for (int i = 0; i <= 1; i++)
+            {
+                for(int j = 0; j <= 5; j++)
+                {
+                    string id_nauczyciela;
+                    id_nauczyciela = DataKeeper.Plan[i, j].ToString();
+                    DBconnect = new SqlConnection(connetionString);
+                    DBconnect.Open();
+                    sql = "SELECT Id_Przedmiotu FROM Zajecia WHERE Id_Prowadzacego='" + id_nauczyciela + "'";
+                    SqlCommand command1 = new SqlCommand(sql, DBconnect);
+                    SqlDataReader reader1 = command1.ExecuteReader();
+                    if (reader1.HasRows)
+                    {
+                        reader1.Read();
+                        string id_przedmiotu;
+                        id_przedmiotu = reader1.GetValue(0).ToString();
+                        DBconnect = new SqlConnection(connetionString);
+                        DBconnect.Open();
+                        sql = "SELECT Nazwa FROM Przedmioty WHERE Id='" + id_przedmiotu + "'";
+                        SqlCommand command2 = new SqlCommand(sql, DBconnect);
+                        SqlDataReader reader2 = command2.ExecuteReader();
+                        if (reader2.HasRows)
+                        {
+                            reader2.Read();
+                            string nazwa;
+                            nazwa = reader2.GetValue(0).ToString();
+                            dataGridView1[i + 1, j].Value = nazwa;
+                            
+                        }
+                    }
+                }
+            }
+
+            saveButton.Visible=true;
+
         }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            string[] pom = loginLabel.Text.Split(' ');
+            string imie;
+            string nazwisko;
+            imie = pom[3];
+            nazwisko = pom[4];
+
+
+            string connetionString, sql = "";
+            SqlConnection DBconnect;
+            connetionString = @"Data Source=mssql-2017.labs.wmi.amu.edu.pl;Initial Catalog=s434903_inzopr2019z;User ID=s444513;Password=Gxrbqfvw7L";
+            DBconnect = new SqlConnection(connetionString);
+            DBconnect.Open();
+            sql = "SELECT Id FROM Studenci WHERE Imie ='" + imie + "' and Nazwisko='" + nazwisko + "'";
+            SqlCommand command = new SqlCommand(sql, DBconnect);
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Read();
+
+                string id_studenta;
+                id_studenta = reader.GetValue(0).ToString();
+            
+
+            for (int i = 0; i <= 1; i++)
+            {
+                for (int j = 0; j <= 5; j++)
+                {
+                    string id_przedmiotu;
+                    id_przedmiotu = DataKeeper.Plan[i, j].ToString();
+                    Console.WriteLine(DataKeeper.Plan[i, j]);
+                    if (id_przedmiotu != "0")
+                    {
+                        DBconnect = new SqlConnection(connetionString);
+                        DBconnect.Open();
+                        sql = "SELECT Id FROM Zajecia WHERE Id_Przedmiotu ='" + id_przedmiotu + "';";
+                        SqlCommand command1 = new SqlCommand(sql, DBconnect);
+                        SqlDataReader reader1 = command1.ExecuteReader();
+                        if (reader1.HasRows)
+                        {
+                            reader1.Read();
+                            string id_zajec;
+                            id_zajec = reader1.GetValue(0).ToString();
+
+                            DBconnect = new SqlConnection(connetionString);
+                            DBconnect.Open();
+                            sql = "insert into Plan_Zajec (Zajecia_Id, Studenci_Id, Status) values (" + id_zajec + ", " + id_studenta + ", 'oczekujący')";
+                            SqlCommand command2 = new SqlCommand(sql, DBconnect);
+                            SqlDataReader reader2 = command2.ExecuteReader();
+                                
+                            }
+                    }
+                }
+            }
+                MessageBox.Show("Zapisano plan");
+                                statusLabel.Text = " Status: Oczekujący na zatwierdzenie";
+                                saveButton.Visible = false;
+                                generateButton.Visible = false;
+        }
+           
+        }
+
+        
     }
 }

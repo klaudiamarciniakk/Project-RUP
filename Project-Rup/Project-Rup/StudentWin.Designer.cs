@@ -43,6 +43,7 @@
             this.saturdayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sundayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusLabel = new System.Windows.Forms.Label();
+            this.saveButton = new System.Windows.Forms.Button();
             this.teacherBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.studentWinBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.teacherBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -193,12 +194,24 @@
             // statusLabel
             // 
             this.statusLabel.AutoSize = true;
-            this.statusLabel.Location = new System.Drawing.Point(467, 336);
+            this.statusLabel.Location = new System.Drawing.Point(383, 336);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(100, 13);
             this.statusLabel.TabIndex = 10;
             this.statusLabel.Text = "Status : _________";
             this.statusLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(232, 336);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(145, 36);
+            this.saveButton.TabIndex = 11;
+            this.saveButton.Text = "Zapisz";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Visible = false;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // teacherBindingSource
             // 
@@ -221,6 +234,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(612, 384);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.generateButton);
@@ -264,5 +278,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn saturdayColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sundayColumn;
         private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.Button saveButton;
     }
 }

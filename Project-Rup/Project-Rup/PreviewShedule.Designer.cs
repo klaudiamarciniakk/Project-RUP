@@ -1,6 +1,6 @@
 ﻿namespace Project_Rup
 {
-    partial class Form1
+    partial class PreviewShedule
     {
         /// <summary>
         /// Required designer variable.

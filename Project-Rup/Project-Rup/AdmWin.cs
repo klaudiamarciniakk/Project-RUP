@@ -103,8 +103,6 @@ namespace Project_Rup
 
             if(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.ColumnIndex == 4)
             {
-                
-
                 var wartośćKonkretnejKomórki = senderGrid.Rows[e.RowIndex].Cells[0].Value;
                 String[] name = wartośćKonkretnejKomórki.ToString().Split(' ');
                 DBconnect = new SqlConnection(connetionString);
@@ -118,14 +116,8 @@ namespace Project_Rup
                     string id;
                     id = reader6.GetValue(0).ToString();
 
-                    Form1 shedule = new Form1(id, name[0], name[1]);
+                    PreviewShedule shedule = new PreviewShedule(id, name[0], name[1]);
                     shedule.Show();
-
-                    
-
-
-
-
                 }
             }
             

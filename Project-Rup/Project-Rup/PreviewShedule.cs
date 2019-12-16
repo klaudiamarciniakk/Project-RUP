@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Project_Rup
 {
-    public partial class Form1 : Form
+    public partial class PreviewShedule : Form
     {
-        public Form1(string id, string name, string surname)
+        public PreviewShedule(string id, string name, string surname)
         {
             InitializeComponent();
             Console.WriteLine(id + " " + name + " " + surname);
