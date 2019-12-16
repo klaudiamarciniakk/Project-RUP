@@ -98,6 +98,11 @@ namespace Project_Rup
                                 prefSum += 30;
                             }
                             iterSat[i] = j + 1;
+                            if(i!=DataKeeper.Subjects.Count-1)
+                            {
+                                i++;
+                                goto OneMore;
+                            }
                             break;
                         }
                         if(j==5)
@@ -120,6 +125,11 @@ namespace Project_Rup
                                 prefSum += 30;
                             }
                             iterSun[i] = j + 1;
+                            if (i != DataKeeper.Subjects.Count - 1)
+                            {
+                                i++;
+                                goto OneMore;
+                            }
                             break;
                         }
                         if (j == 5)
@@ -182,7 +192,7 @@ namespace Project_Rup
                             break;
                     }
                     generatedPlan.Add(prefSum);
-                    allPlans.Add(generatedPlan);
+                    allPlans.Add(generatedPlan.ToList());
                     generatedPlan.RemoveAt(generatedPlan.IndexOf(generatedPlan.Last()));
                     for (int j = 0; j < 6; j++)
                     {
@@ -307,6 +317,21 @@ namespace Project_Rup
                             noGrid[1, j] = 0;
                             iterSat[i] = 6;
                             iterSun[i] = j + 1;
+                            if(i==0)
+                            {
+                                int pom3 = 0;
+                                for(int k=iterSun[i];k<6;k++)
+                                {
+                                    if(DataKeeper.Subjects[i].Grid[1,j]!=0)
+                                    {
+                                        pom3++;
+                                    }
+                                }
+                                if(pom3==0)
+                                {
+                                    pom++;
+                                }
+                            }
                             break;
                         }
                         if (noGrid[0, j] == generatedPlan.Last())
