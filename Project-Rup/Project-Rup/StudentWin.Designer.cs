@@ -200,7 +200,6 @@
             this.statusLabel.TabIndex = 10;
             this.statusLabel.Text = "Status : _________";
             this.statusLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            
             // 
             // saveButton
             // 

@@ -21,44 +21,133 @@ namespace Project_Rup
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 5;
             comboBox3.SelectedIndex = 0;
-            dataGridView1.Rows.Add("8.15-9.45","","");
+            dataGridView1.Rows.Add("8.15-9.45", "", "");
             dataGridView1.Rows.Add("10.00-11.30", "", "");
             dataGridView1.Rows.Add("11.45-13.15", "", "");
             dataGridView1.Rows.Add("13.45-15.15", "", "");
             dataGridView1.Rows.Add("15.30-17.00", "", "");
             dataGridView1.Rows.Add("17.15-18.45", "", "");
             statusLabel.Text = "Status : BRAK";
-            loginLabel.Text = "Zalogowano urzytkownika : " +login+" "+password+" , semestr : "+semester;
-
+            loginLabel.Text = "Zalogowano urzytkownika : " + login + " " + password + " , semestr : " + semester;
             string connetionString, sql = "";
             SqlConnection DBconnect;
             connetionString = @"Data Source=mssql-2017.labs.wmi.amu.edu.pl;Initial Catalog=s434903_inzopr2019z;User ID=s444513;Password=Gxrbqfvw7L";
             DBconnect = new SqlConnection(connetionString);
             DBconnect.Open();
-            sql = "Select DISTINCT prowadzacy.imie, prowadzacy.nazwisko, prowadzacy.Id from prowadzacy,zajecia,Przedmioty where zajecia.Id_Prowadzacego=Prowadzacy.Id and zajecia.Id_Przedmiotu=Przedmioty.Id and Przedmioty.Semestr='"+semester+"' order by Nazwisko";
-            SqlCommand command = new SqlCommand(sql, DBconnect);
-            SqlDataReader reader = command.ExecuteReader();
-            if (reader.HasRows)
+            sql = "Select Id from Studenci where Imie='" + login + "' and Nazwisko = '" + password + "'";
+            SqlCommand command0 = new SqlCommand(sql, DBconnect);
+            SqlDataReader reader0 = command0.ExecuteReader();
+            if (reader0.HasRows)
             {
-                string teacherName, teacherSurname;
-                int teacherId;
-                while (reader.Read())
+                string id_studenta;
+                reader0.Read();
+                id_studenta = reader0.GetValue(0).ToString();
+
+                DBconnect = new SqlConnection(connetionString);
+                DBconnect.Open();
+                sql = "Select Status from Plan_Zajec where Studenci_Id='" + id_studenta + "'";
+                SqlCommand command01 = new SqlCommand(sql, DBconnect);
+                SqlDataReader reader01 = command01.ExecuteReader();
+                if (reader01.HasRows)
                 {
-                    teacherName = reader.GetValue(0).ToString();
-                    teacherSurname = reader.GetValue(1).ToString();
-                    teacherId = reader.GetInt32(2);
-                    DataKeeper.Teachers.Add(new Teacher(teacherName, teacherSurname, teacherId));
+                    prefButton.Enabled = false;
+                    comboBox1.Enabled = false;
+                    comboBox2.Enabled = false;
+                    comboBox3.Enabled = false;
+                    generateButton.Enabled = false;
+                    saveButton.Enabled = false;
+                    reader01.Read();
+                    string status;
+                    status = reader01.GetValue(0).ToString();
+                    statusLabel.Text = "Status: " + status;
+
+                    connetionString = @"Data Source=mssql-2017.labs.wmi.amu.edu.pl;Initial Catalog=s434903_inzopr2019z;User ID=s444513;Password=Gxrbqfvw7L";
+                    DBconnect = new SqlConnection(connetionString);
+                    DBconnect.Open();
+                    sql = "select Zajecia_Id from Plan_Zajec where Studenci_Id = " + id_studenta;
+                    SqlCommand command02 = new SqlCommand(sql, DBconnect);
+                    SqlDataReader reader02 = command02.ExecuteReader();
+                    if (reader02.HasRows)
+                    {
+                        for (int i = 1; i <= 4; i++)
+                        {
+                            reader02.Read();
+                            string id_zajec;
+                            id_zajec = reader02.GetValue(0).ToString();
+                            DBconnect = new SqlConnection(connetionString);
+                            DBconnect.Open();
+                            sql = "select Id_przedmiotu, Id_dnia, Id_Godziny  from Zajecia where Id =" + id_zajec;
+                            SqlCommand command03 = new SqlCommand(sql, DBconnect);
+                            SqlDataReader reader03 = command03.ExecuteReader();
+                            if (reader03.HasRows)
+                            {
+                                reader03.Read();
+                                string id_przedmiotu;
+                                string dzien;
+                                string godzina;
+                                id_przedmiotu = reader03.GetValue(0).ToString();
+                                dzien = reader03.GetValue(1).ToString();
+                                godzina = reader03.GetValue(2).ToString();
+                                int h = Convert.ToInt32(godzina);
+                                DBconnect = new SqlConnection(connetionString);
+                                DBconnect.Open();
+                                sql = "select  Nazwa from Przedmioty where Id =" + id_przedmiotu;
+                                SqlCommand command04 = new SqlCommand(sql, DBconnect);
+                                SqlDataReader reader04 = command04.ExecuteReader();
+                                if (reader04.HasRows)
+                                {
+                                    reader04.Read();
+                                    string nazwa;
+                                    nazwa = reader04.GetValue(0).ToString();
+
+                                    if (dzien == "6")
+                                    {
+                                        dataGridView1.Rows[h - 1].Cells[1].Value = nazwa;
+                                    }
+                                    if (dzien == "7")
+                                    {
+                                        dataGridView1.Rows[h - 1].Cells[2].Value = nazwa;
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+
                 }
             }
-            else
+            if (!reader0.HasRows)
             {
-                MessageBox.Show("Nie znaleźono rekordu.");
+
+
+                
+                connetionString = @"Data Source=mssql-2017.labs.wmi.amu.edu.pl;Initial Catalog=s434903_inzopr2019z;User ID=s444513;Password=Gxrbqfvw7L";
+                DBconnect = new SqlConnection(connetionString);
+                DBconnect.Open();
+                sql = "Select DISTINCT prowadzacy.imie, prowadzacy.nazwisko, prowadzacy.Id from prowadzacy,zajecia,Przedmioty where zajecia.Id_Prowadzacego=Prowadzacy.Id and zajecia.Id_Przedmiotu=Przedmioty.Id and Przedmioty.Semestr='" + semester + "' order by Nazwisko";
+                SqlCommand command = new SqlCommand(sql, DBconnect);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    string teacherName, teacherSurname;
+                    int teacherId;
+                    while (reader.Read())
+                    {
+                        teacherName = reader.GetValue(0).ToString();
+                        teacherSurname = reader.GetValue(1).ToString();
+                        teacherId = reader.GetInt32(2);
+                        DataKeeper.Teachers.Add(new Teacher(teacherName, teacherSurname, teacherId));
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Nie znaleźono rekordu.");
+                }
+                reader.Close();
+                DBconnect.Close();
             }
-            reader.Close();
-            DBconnect.Close();
+
         }
-
-
         private void prefButton_Click(object sender, EventArgs e)
         {
             PrefWin next = new PrefWin(DataKeeper.Teachers);
@@ -186,7 +275,7 @@ namespace Project_Rup
                             reader1.Read();
                             string id_zajec;
                             id_zajec = reader1.GetValue(0).ToString();
-
+                                
                             DBconnect = new SqlConnection(connetionString);
                             DBconnect.Open();
                             sql = "insert into Plan_Zajec (Zajecia_Id, Studenci_Id, Status) values (" + id_zajec + ", " + id_studenta + ", 'oczekujący')";
@@ -197,10 +286,23 @@ namespace Project_Rup
                     }
                 }
             }
+                DBconnect = new SqlConnection(connetionString);
+                DBconnect.Open();
+                sql = "SELECT Status FROM Plan_Zajec WHERE Studenci_Id ='" + id_studenta + "';";
+                SqlCommand command3 = new SqlCommand(sql, DBconnect);
+                SqlDataReader reader3 = command3.ExecuteReader();
+                if (reader3.HasRows)
+                {
+                    reader3.Read();
+                    string status;
+                    status = reader3.GetValue(0).ToString();
+                    statusLabel.Text = " Status: " + status;
+                }
+
                 MessageBox.Show("Zapisano plan");
-                                statusLabel.Text = " Status: Oczekujący na zatwierdzenie";
-                                saveButton.Visible = false;
-                                generateButton.Visible = false;
+                
+                                saveButton.Enabled = false;
+                                generateButton.Enabled = false;
         }
            
         }

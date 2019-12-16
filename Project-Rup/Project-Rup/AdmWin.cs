@@ -150,7 +150,7 @@ namespace Project_Rup
 
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.ColumnIndex == 3)
             {
-                Console.WriteLine("przycisnieto prycisk odmowy");
+                Console.WriteLine("przycisnieto przycisk odmowy");
                 var wartośćKonkretnejKomórki = senderGrid.Rows[e.RowIndex].Cells[0].Value;
                 String[] name = wartośćKonkretnejKomórki.ToString().Split(' ');
                // Console.WriteLine(name[0] + " " + name[1]);
@@ -166,7 +166,7 @@ namespace Project_Rup
                     id = reader5.GetValue(0).ToString();
                     DBconnect = new SqlConnection(connetionString);
                     DBconnect.Open();
-                    sql = "update Plan_Zajec set status = 'odrzucony' where Studenci_Id =" + id;
+                    sql = "delete Plan_Zajec where Studenci_Id =" + id;
                     SqlCommand command6 = new SqlCommand(sql, DBconnect);
                     SqlDataReader reader6 = command6.ExecuteReader();
                     MessageBox.Show("Odrzucono pomyślnie");
