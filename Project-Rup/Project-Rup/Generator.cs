@@ -26,7 +26,7 @@ namespace Project_Rup
                     pom++;
                 }
             }
-            if(pom==0)
+            if(pom==0 && CheckBreaks(noGrid) == 0)
             {
                 DataKeeper.Plan = noGrid;
             }
@@ -58,14 +58,369 @@ namespace Project_Rup
                                 }
                             }
                         }
-                        if (pom == 0)
+                        if (pom == 0 && CheckBreaks(noGrid) == 0)
                         {
                             DataKeeper.Plan = noGrid;
                             break;
                         }
                     }
-
                 }
+                if(pom!=0)
+                {
+                    noGrid = GenerateAll();
+                    DataKeeper.Plan = noGrid;
+                }
+            }
+        }
+
+        private int[,] GenerateAll()
+        {
+            List<List<int>> allPlans = new List<List<int>>();
+            List<int> generatedPlan = new List<int>();
+            int[,] noGrid = new int[2, 6];
+            int[] iterSun = new int[DataKeeper.Subjects.Count];
+            int[] iterSat = new int[DataKeeper.Subjects.Count];
+            int prefSum = 0, pom = 0,pom2=0,pomX=0,pomY=0;
+            for (int i = 0; i < DataKeeper.Subjects.Count; i++)
+            {
+                OneMore:
+                if (iterSat[i] < 6)
+                {
+                    for (int j = iterSat[i]; j < 6; j++)
+                    {
+                        if(DataKeeper.Subjects[i].Grid[0,j]!=0&&noGrid[0,j]==0)
+                        {
+                            noGrid[0, j] = DataKeeper.Subjects[i].Grid[0, j];
+                            generatedPlan.Add(noGrid[0, j]);
+                            prefSum += DataKeeper.Teachers.Where(k => k.Id == noGrid[0, j]).FirstOrDefault().Pref;
+                            if(j<fromCrit||j>toCrit)
+                            {
+                                prefSum += 30;
+                            }
+                            iterSat[i] = j + 1;
+                            break;
+                        }
+                        if(j==5)
+                        {
+                            iterSat[i] = 6;
+                        }
+                    }
+                }
+                if (iterSun[i] < 6 && iterSat[i] == 6)
+                {
+                    for (int j = iterSun[i]; j < 6; j++)
+                    {
+                        if (DataKeeper.Subjects[i].Grid[1, j] != 0 && noGrid[1, j] == 0)
+                        {
+                            noGrid[1, j] = DataKeeper.Subjects[i].Grid[1, j];
+                            generatedPlan.Add(noGrid[1, j]);
+                            prefSum += DataKeeper.Teachers.Where(k => k.Id == noGrid[1, j]).FirstOrDefault().Pref;
+                            if (j < fromCrit || j > toCrit)
+                            {
+                                prefSum += 30;
+                            }
+                            iterSun[i] = j + 1;
+                            break;
+                        }
+                        if (j == 5)
+                        {
+                            if(i==0)
+                            {
+                                pom++;
+                            }
+                            iterSun[i] = 6;
+                        }
+                    }
+                }
+                if(pom!=0)
+                {
+                    break;
+                }
+                if(i==DataKeeper.Subjects.Count-1)
+                {
+                    pom2 = CheckBreaks(noGrid);
+                    switch(windowCrit)
+                    {
+                        case 1:
+                            if(pom2>1)
+                            {
+                                prefSum += (int)Math.Pow(2, pom2);
+                            }
+                            break;
+                        case 2:
+                            if (pom2 > 2)
+                            {
+                                prefSum += (int)Math.Pow(2, pom2);
+                            }
+                            break;
+                        case 3:
+                            if (pom2 > 3)
+                            {
+                                prefSum += (int)Math.Pow(2, pom2);
+                            }
+                            break;
+                        case 4:
+                            if (pom2 > 4)
+                            {
+                                prefSum += (int)Math.Pow(2, pom2);
+                            }
+                            break;
+                        case 5:
+                            if (pom2 > 5)
+                            {
+                                prefSum += (int)Math.Pow(2, pom2);
+                            }
+                            break;
+                        case 6:
+                            if (pom2 > 6)
+                            {
+                                prefSum += (int)Math.Pow(2, pom2);
+                            }
+                            break;
+                        case 7:
+                            prefSum += (int)Math.Pow(2, pom2);
+                            break;
+                    }
+                    generatedPlan.Add(prefSum);
+                    allPlans.Add(generatedPlan);
+                    generatedPlan.RemoveAt(generatedPlan.IndexOf(generatedPlan.Last()));
+                    for (int j = 0; j < 6; j++)
+                    {
+                        if(noGrid[1,j]==generatedPlan.Last())
+                        {
+                            pomX = 1;
+                            pomY = j;
+                            break;
+                        }
+                        if (noGrid[0, j] == generatedPlan.Last())
+                        {
+                            pomX = 0;
+                            pomY = j;
+                            break;
+                        }
+                    }
+                    pom2 = 0;
+                    if(pomX==1)
+                    {
+                        for (int j = pomY+1; j < 6; j++)
+                        {
+                            if(DataKeeper.Subjects[i].Grid[1,j]!=0)
+                            {
+                                pom2++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int j = 0 + 1; j < 6; j++)
+                        {
+                            if (DataKeeper.Subjects[i].Grid[1, j] != 0)
+                            {
+                                pom2++;
+                            }
+                        }
+                        for (int j = pomY + 1; j < 6; j++)
+                        {
+                            if (DataKeeper.Subjects[i].Grid[0, j] != 0)
+                            {
+                                pom2++;
+                            }
+                        }
+                    }
+                    if(pom2==0)
+                    {
+                        generatedPlan.RemoveAt(generatedPlan.IndexOf(generatedPlan.Last()));
+                        prefSum -= DataKeeper.Teachers.Where(k => k.Id == noGrid[pomX, pomY]).FirstOrDefault().Pref;
+                        if (pomY < fromCrit || pomY > toCrit)
+                        {
+                            prefSum -= 30;
+                        }
+                        noGrid[pomX, pomY] = 0;
+                        iterSat[i] = 0;
+                        iterSun[i] = 0;
+                        i--;
+                        for (int j = 0; j < 6; j++)
+                        {
+                            if (noGrid[1, j] == generatedPlan.Last())
+                            {
+                                generatedPlan.RemoveAt(generatedPlan.IndexOf(generatedPlan.Last()));
+                                prefSum -= DataKeeper.Teachers.Where(k => k.Id == noGrid[1, j]).FirstOrDefault().Pref;
+                                if (j < fromCrit || j > toCrit)
+                                {
+                                    prefSum -= 30;
+                                }
+                                noGrid[1, j] = 0;
+                                iterSat[i] = 6;
+                                iterSun[i] = j + 1;
+                                break;
+                            }
+                            if (noGrid[0, j] == generatedPlan.Last())
+                            {
+                                generatedPlan.RemoveAt(generatedPlan.IndexOf(generatedPlan.Last()));
+                                prefSum -= DataKeeper.Teachers.Where(k => k.Id == noGrid[0, j]).FirstOrDefault().Pref;
+                                if (j < fromCrit || j > toCrit)
+                                {
+                                    prefSum -= 30;
+                                }
+                                noGrid[0, j] = 0;
+                                iterSat[i] = j + 1;
+                                iterSun[i] = 0;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        generatedPlan.RemoveAt(generatedPlan.IndexOf(generatedPlan.Last()));
+                        prefSum -= DataKeeper.Teachers.Where(k => k.Id == noGrid[pomX, pomY]).FirstOrDefault().Pref;
+                        if (pomY < fromCrit || pomY > toCrit)
+                        {
+                            prefSum -= 30;
+                        }
+                        noGrid[pomX, pomY] = 0;
+                        if(pomX==1)
+                        {
+                            iterSun[i] = pomY + 1;
+                            goto OneMore;
+                        }
+                        else
+                        {
+                            iterSat[i] = pomY + 1;
+                            goto OneMore;
+                        }
+                    }
+                }
+                else
+                {
+                    iterSat[i] = 0;
+                    iterSun[i] = 0;
+                    i--;
+                    for (int j = 0; j < 6; j++)
+                    {
+                        if (noGrid[1, j] == generatedPlan.Last())
+                        {
+                            generatedPlan.RemoveAt(generatedPlan.IndexOf(generatedPlan.Last()));
+                            prefSum -= DataKeeper.Teachers.Where(k => k.Id == noGrid[1, j]).FirstOrDefault().Pref;
+                            if (j < fromCrit || j > toCrit)
+                            {
+                                prefSum -= 30;
+                            }
+                            noGrid[1, j] = 0;
+                            iterSat[i] = 6;
+                            iterSun[i] = j + 1;
+                            break;
+                        }
+                        if (noGrid[0, j] == generatedPlan.Last())
+                        {
+                            generatedPlan.RemoveAt(generatedPlan.IndexOf(generatedPlan.Last()));
+                            prefSum -= DataKeeper.Teachers.Where(k => k.Id == noGrid[0, j]).FirstOrDefault().Pref;
+                            if (j < fromCrit || j > toCrit)
+                            {
+                                prefSum -= 30;
+                            }
+                            noGrid[0, j] = 0;
+                            iterSat[i] = j + 1;
+                            iterSun[i] = 0;
+                        }
+                    }
+                }
+            }
+            pom = allPlans[0].Last();
+            generatedPlan = allPlans[0];
+            for (int i = 1; i < allPlans.Count; i++)
+            {
+                if(pom>allPlans[i].Last())
+                {
+                    pom = allPlans[i].Last();
+                    generatedPlan = allPlans[i];
+                }
+            }
+            generatedPlan.RemoveAt(generatedPlan.IndexOf(generatedPlan.Last()));
+            noGrid = new int[2, 6];
+            for (int i = 0; i < generatedPlan.Count; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    if(generatedPlan[i]==DataKeeper.Subjects[i].Grid[0,j])
+                    {
+                        noGrid[0, j] = generatedPlan[i];
+                        break;
+                    }
+                    if (generatedPlan[i] == DataKeeper.Subjects[i].Grid[1, j])
+                    {
+                        noGrid[1, j] = generatedPlan[i];
+                        break;
+                    }
+                }
+            }
+            return noGrid;
+        }
+
+        private int CheckBreaks(int[,] noGrid)
+        {
+            if (windowCrit == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                int counter = 0;
+                for (int i = 0; i < 6; i++)
+                {
+                    if(noGrid[0,i]!=0)
+                    {
+                        for (int j = 5; j >= i; j--)
+                        {
+                            if(noGrid[0,j]!=0)
+                            {
+                                if(i==j||i+1==j)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    for (int k = i+1; k < j; k++)
+                                    {
+                                        if (noGrid[0,k] == 0)
+                                        {
+                                            counter++;
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+                for (int i = 0; i < 6; i++)
+                {
+                    if (noGrid[1, i] != 0)
+                    {
+                        for (int j = 5; j >= i; j--)
+                        {
+                            if (noGrid[1, j] != 0)
+                            {
+                                if (i == j || i + 1 == j)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    for (int k = i+1; k < j; k++)
+                                    {
+                                        if (noGrid[1, k] == 0)
+                                        {
+                                            counter++;
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+                return counter;
             }
         }
 
