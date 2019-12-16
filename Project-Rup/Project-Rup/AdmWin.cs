@@ -82,7 +82,7 @@ namespace Project_Rup
                             //Console.WriteLine(name + " " + surname);
 
                             string status = "oczekujący";
-                            tabela1.Rows.Add(name + " " + surname, status, "Zaakceptuj", "Odrzuć");
+                            tabela1.Rows.Add(name + " " + surname, status, "Zaakceptuj", "Odrzuć", "Podgląd" );
 
 
                         }
@@ -118,8 +118,8 @@ namespace Project_Rup
                     string id;
                     id = reader6.GetValue(0).ToString();
 
-                    PreviewShedule next = new PreviewShedule(id);
-                    next.Show();
+                    Form1 shedule = new Form1(id, name[0], name[1]);
+                    shedule.Show();
 
                     
 

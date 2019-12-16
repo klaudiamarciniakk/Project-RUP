@@ -42,19 +42,19 @@
             // loginLabel
             // 
             this.loginLabel.AutoSize = true;
-            this.loginLabel.Location = new System.Drawing.Point(12, 10);
+            this.loginLabel.Location = new System.Drawing.Point(9, 8);
+            this.loginLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.loginLabel.Name = "loginLabel";
-            this.loginLabel.Size = new System.Drawing.Size(93, 17);
+            this.loginLabel.Size = new System.Drawing.Size(72, 13);
             this.loginLabel.TabIndex = 0;
             this.loginLabel.Text = "Zalogowano :";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(413, 59);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(310, 48);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
@@ -67,11 +67,10 @@
             this.accept,
             this.reject,
             this.seeShedule});
-            this.tabela1.Location = new System.Drawing.Point(41, 112);
-            this.tabela1.Margin = new System.Windows.Forms.Padding(4);
+            this.tabela1.Location = new System.Drawing.Point(1, 89);
             this.tabela1.Name = "tabela1";
             this.tabela1.RowHeadersWidth = 51;
-            this.tabela1.Size = new System.Drawing.Size(685, 288);
+            this.tabela1.Size = new System.Drawing.Size(671, 234);
             this.tabela1.TabIndex = 2;
             this.tabela1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tabela1_CellContentClick);
             // 
@@ -105,7 +104,7 @@
             this.reject.Name = "reject";
             this.reject.Text = "Odrzuć";
             this.reject.Width = 125;
-            //
+            // 
             // seeShedule
             // 
             this.seeShedule.HeaderText = "Podgląd planu";
@@ -113,16 +112,16 @@
             this.seeShedule.Name = "seeShedule";
             this.seeShedule.Text = "Zobacz plan";
             this.seeShedule.Width = 125;
-            //
+            // 
             // AdmWin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(929, 505);
+            this.ClientSize = new System.Drawing.Size(697, 410);
             this.Controls.Add(this.tabela1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.loginLabel);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AdmWin";
             this.Text = "AdmWin";
             ((System.ComponentModel.ISupportInitialize)(this.tabela1)).EndInit();

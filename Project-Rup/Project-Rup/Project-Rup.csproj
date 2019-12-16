@@ -53,11 +53,11 @@
       <DependentUpon>AdmWin.cs</DependentUpon>
     </Compile>
     <Compile Include="DataKeeper.cs" />
-    <Compile Include="PreviewShedule.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PreviewShedule.Designer.cs">
-      <DependentUpon>PreviewShedule.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Generator.cs" />
     <Compile Include="LoginWin.cs">
@@ -85,14 +85,14 @@
     <EmbeddedResource Include="AdmWin.resx">
       <DependentUpon>AdmWin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginWin.resx">
       <DependentUpon>LoginWin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrefWin.resx">
       <DependentUpon>PrefWin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PreviewShedule.resx">
-      <DependentUpon>PreviewShedule.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
