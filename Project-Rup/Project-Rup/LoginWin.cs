@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace Project_Rup
 {
+    ///
+    /// klasa odpowiada za logowanie do systemu, login i hasło jest pobierane z bazy danych
+    /// 
     public partial class LoginWin : Form
     {
         private string login = "", password = "";
@@ -18,7 +21,9 @@ namespace Project_Rup
         {
             InitializeComponent();
         }
-
+        ///
+        /// potwierdzenie logowania również poprzez naciśnięcie klawisza Enter
+        /// 
         private void loginTextBox2_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

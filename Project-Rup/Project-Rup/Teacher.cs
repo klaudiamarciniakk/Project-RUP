@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Project_Rup
 {
+    ///
+    ///klasa definiująca prowadzącego zajęcia, zawiera pola z jego imieniem, nazwiskie oraz id
+    ///
     public class Teacher
     {
         int pref, id;
@@ -15,7 +18,9 @@ namespace Project_Rup
         public int Pref { get => pref; set => pref = value; }
         public string Surname { get => surname; set => surname = value; }
         public string Name { get => name; set => name = value; }
-
+        ///
+        ///konstruktor przypisujące prowadzącemu imię, nazwisko oraz id podane w parametrach
+        ///
         public Teacher(string tName, string tSurname,int tId)
         {
             Name = tName;
@@ -23,6 +28,9 @@ namespace Project_Rup
             Id = tId;
             Pref = 1;
         }
+        ///
+        ///konstruktor domyślny przypisujący prowadzącemu domyślne wartości
+        ///
         public Teacher()
         {
             Pref = 0;

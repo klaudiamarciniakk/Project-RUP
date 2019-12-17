@@ -8,9 +8,9 @@ namespace Project_Rup
 {
     static class Program
     {
-        /// <summary>
+        /// 
         /// Główny punkt wejścia dla aplikacji.
-        /// </summary>
+        /// 
         [STAThread]
         static void Main()
         {

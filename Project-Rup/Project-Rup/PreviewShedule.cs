@@ -11,6 +11,10 @@ using System.Windows.Forms;
 
 namespace Project_Rup
 {
+    ///
+    /// klasa wypełniająca tablicę planu zajęć
+    /// korzystając z bazy danych pobiera rekordy i uzupełnia dane w tablicy zgodnie z godzinami i dniami
+    /// 
     public partial class PreviewShedule : Form
     {
         public PreviewShedule(string id, string name, string surname)

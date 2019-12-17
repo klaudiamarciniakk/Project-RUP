@@ -8,16 +8,27 @@ using System.Windows.Forms;
 
 namespace Project_Rup
 {
+    ///
+    ///klasa przedmiot mająca na celu wypełnienie siatki godzin danego przedmiotu
+    ///
     public class Subject
     {
         string name,id;
         int[,] grid = new int[2,6];
+        ///
+        ///konstruktor poprzez który wybierany jest dany przedmiot
+        ///
         public Subject(string sName, string sId)
         {
             Name = sName;
             Id = sId;
             FillGrid();
         }
+        ///
+        ///metoda łącząca się z bazą danych
+        ///zaczytuje do tablicy pomocniczej nauczycieli prowadzących dany przedmiot
+        ///wypełnia siatkę godzin na dany przedmiot
+        ///
         private void FillGrid()
         {
             string connetionString, sql = "";

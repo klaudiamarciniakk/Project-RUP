@@ -11,10 +11,16 @@ using System.Windows.Forms;
 
 namespace Project_Rup
 {
+    ///
+    ///klasa odpowiadająca za wygląd głównego okna przeglądu studenta oraz wypełnianie go danymi zawartymi w bazie danych
+    ///jeśli plan zajęć jest już zatwierdzony to wypełnia tabelę zajęciami wcześniej wybranymi
+    ///
     public partial class StudentWin : Form
     {
         private string Semester = "";
-
+        ///
+        ///metoda wpisuje w tabeli godziny, następnie pobiera wygenerowany plan z bazy danych i wypełnia tabelę
+        ///
         public StudentWin(string login, string password, string semester)
         {
             Semester = semester;

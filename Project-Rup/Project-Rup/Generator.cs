@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace Project_Rup
 {
+    ///
+    /// klasa generująca plan zajęć według wcześnej wybranych kryteriów (przedziały godzinowe, okienka, wagi nauczycieli)
+    /// 
     class Generator
     {
         int fromCrit, toCrit, windowCrit;

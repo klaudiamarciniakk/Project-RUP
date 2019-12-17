@@ -12,6 +12,10 @@ using System.Windows.Forms;
 
 namespace Project_Rup
 {
+    ///
+    /// klasa odpowiedzialna za okienko admina, w których są wyświetlane rekordy studentów którzy mają wygenerowany plan
+    /// jego głównym zadaniem jest stworzenie możliwości zaakceptowania lub odrzucenia planu zajęć poszczególnych studentów
+    /// 
     public partial class AdmWin : Form
     {
         public AdmWin(string login, string password)
@@ -36,7 +40,6 @@ namespace Project_Rup
                 counter++;
                 //wyczytuje ile jest wierszy w stworzonej tabeli
             }
-            // Console.WriteLine("Ilosc wierszy: " +counter);
             DBconnect = new SqlConnection(connetionString);
             DBconnect.Open();
             sql = "SELECT * FROM Plan_Zajec WHERE Status LIKE 'Oczekujący'";
@@ -52,14 +55,10 @@ namespace Project_Rup
                     string id_studenta;
                     id_studenta = reader1.GetValue(1).ToString();
 
-                    // Console.WriteLine("id studenta: " + id_studenta);
-
-                    //  Console.WriteLine("wielkosc listy: " + uzyteid.Count);
 
                     if (!uzyteid.Contains(id_studenta))
                     {
                         uzyteid.Add(id_studenta);
-                        // Console.WriteLine("wielkosc listy po dodaniu: " + uzyteid.Count);
                         DBconnect = new SqlConnection(connetionString);
                         DBconnect.Open();
                         sql = "Select * from Studenci where id=" + id_studenta;
@@ -73,7 +72,6 @@ namespace Project_Rup
                             name = reader2.GetValue(1).ToString();
 
                             surname = reader2.GetValue(2).ToString();
-                            //Console.WriteLine(name + " " + surname);
 
                             string status = "oczekujący";
                             tabela1.Rows.Add(name + " " + surname, status, "Zaakceptuj", "Odrzuć", "Podgląd");
@@ -122,7 +120,6 @@ namespace Project_Rup
             {
                 var wartośćKonkretnejKomórki = senderGrid.Rows[e.RowIndex].Cells[0].Value;
                 String[] name = wartośćKonkretnejKomórki.ToString().Split(' ');
-                //Console.WriteLine(name[0] + " " + name[1]);
                 DBconnect = new SqlConnection(connetionString);
                 DBconnect.Open();
                 sql = "select Id from Studenci where Imie ='" + name[0] + "' and Nazwisko ='" + name[1] + "'";
@@ -191,10 +188,8 @@ namespace Project_Rup
 
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.ColumnIndex == 3)
             {
-                //Console.WriteLine("przycisnieto przycisk odmowy");
                 var wartośćKonkretnejKomórki = senderGrid.Rows[e.RowIndex].Cells[0].Value;
                 String[] name = wartośćKonkretnejKomórki.ToString().Split(' ');
-                // Console.WriteLine(name[0] + " " + name[1]);
                 DBconnect = new SqlConnection(connetionString);
                 DBconnect.Open();
                 sql = "select Id from Studenci where Imie ='" + name[0] + "' and Nazwisko ='" + name[1] + "'";

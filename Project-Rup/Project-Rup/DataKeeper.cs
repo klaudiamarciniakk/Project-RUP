@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Project_Rup
 {
+    ///
+    /// klasa odpowiedzialna za przechowywanie danych w poszczególnych strukrurach danych
+    /// wykorzystuje listy oraz tablice wielowymiarowe
+    /// 
     public class DataKeeper
     {
         static List<Subject> subjects = new List<Subject>();

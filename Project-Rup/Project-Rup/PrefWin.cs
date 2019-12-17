@@ -23,7 +23,9 @@ namespace Project_Rup
                 count++;
             }
         }
-
+        ///
+        /// ustalanie wagi dla każdego nauczyciela oraz zapisanie tych wag
+        /// 
         private void saveButton_Click(object sender, EventArgs e)
         {
             string pom;
