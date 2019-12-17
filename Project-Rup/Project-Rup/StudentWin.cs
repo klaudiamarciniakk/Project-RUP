@@ -238,7 +238,7 @@ namespace Project_Rup
                     DBconnect.Close();
                 }
             }
-
+            generateButton.Enabled = false;
             saveButton.Visible = true;
         }
 

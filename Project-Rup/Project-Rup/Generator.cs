@@ -448,7 +448,7 @@ namespace Project_Rup
                             pom5++;
                             break;
                         }
-                        if (generatedPlan[i] == DataKeeper.Subjects[k].Grid[1, j] && noGrid[0, j] == 0)
+                        if (generatedPlan[i] == DataKeeper.Subjects[k].Grid[1, j] && noGrid[1, j] == 0)
                         {
                             noGrid[1, j] = generatedPlan[i];
                             pom5++;

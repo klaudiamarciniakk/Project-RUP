@@ -27,12 +27,22 @@ namespace Project_Rup
         private void saveButton_Click(object sender, EventArgs e)
         {
             string pom;
+            int pom2 = 0;
             for (int i = 0; i < count; i++)
             {
                 pom = dataGridView1[3, i].Value.ToString();
+                if(System.Convert.ToInt32(pom)<1|| System.Convert.ToInt32(pom)>10)
+                {
+                    MessageBox.Show("Wartości muszą być w zakresie od 1 do 10.");
+                    pom2++;
+                    break;
+                }
                 DataKeeper.Teachers[i].Pref = System.Convert.ToInt32(pom);
             }
-            this.Close();
+            if (pom2 == 0)
+            {
+                this.Close();
+            }
         }
     }
 }
