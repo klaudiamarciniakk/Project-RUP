@@ -240,6 +240,10 @@ namespace Project_Rup
             }
             generateButton.Enabled = false;
             saveButton.Visible = true;
+            prefButton.Enabled = false;
+            comboBox1.Enabled = false;
+            comboBox2.Enabled = false;
+            comboBox3.Enabled = false;
         }
 
         private void saveButton_Click(object sender, EventArgs e)

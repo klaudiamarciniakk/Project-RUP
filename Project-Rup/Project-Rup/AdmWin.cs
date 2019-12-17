@@ -78,9 +78,15 @@ namespace Project_Rup
                             string status = "oczekujący";
                             tabela1.Rows.Add(name + " " + surname, status, "Zaakceptuj", "Odrzuć", "Podgląd");
                         }
+                        reader2.Close();
+                        DBconnect.Close();
                     }
                 }
             }
+            reader.Close();
+            DBconnect.Close();
+            reader1.Close();
+            DBconnect.Close();
         }
 
         private void tabela1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -108,6 +114,8 @@ namespace Project_Rup
                     PreviewShedule shedule = new PreviewShedule(id, name[0], name[1]);
                     shedule.Show();
                 }
+                reader6.Close();
+                DBconnect.Close();
             }
 
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.ColumnIndex == 2)
@@ -129,18 +137,61 @@ namespace Project_Rup
                     DBconnect.Open();
                     sql = "update Plan_Zajec set status = 'zatwierdzony' where Studenci_Id =" + id;
                     SqlCommand command4 = new SqlCommand(sql, DBconnect);
-
                     SqlDataReader reader4 = command4.ExecuteReader();
+
+                    DBconnect = new SqlConnection(connetionString);
+                    DBconnect.Open();
+                    sql = "select Zajecia_Id from Plan_Zajec where Studenci_Id=" + id; ;
+                    SqlCommand command5 = new SqlCommand(sql, DBconnect);
+                    SqlDataReader reader5 = command5.ExecuteReader();
+                    if (reader5.HasRows)
+                    {
+                        for (int i = 0; i <= 3; i++)
+                        {
+                            reader5.Read();
+                            string zajecia_id;
+                            zajecia_id = reader5.GetValue(0).ToString();
+                            DBconnect = new SqlConnection(connetionString);
+                            DBconnect.Open();
+                            sql = "select Ilosc_Miejsc from Zajecia where Id=" + zajecia_id;
+                            SqlCommand command6 = new SqlCommand(sql, DBconnect);
+                            SqlDataReader reader6 = command6.ExecuteReader();
+                            if (reader6.HasRows)
+                            {
+                                int ilo_miejsc;
+                                string ilosc_miejsc;
+                                reader6.Read();
+                                ilosc_miejsc = reader6.GetValue(0).ToString();
+                                ilo_miejsc = Convert.ToInt32(ilosc_miejsc);
+                                DBconnect = new SqlConnection(connetionString);
+                                DBconnect.Open();
+                                sql = "update Zajecia set Ilosc_Miejsc =" + (ilo_miejsc - 1) + " where Id=" + zajecia_id;
+                                SqlCommand command7 = new SqlCommand(sql, DBconnect);
+                                SqlDataReader reader7 = command7.ExecuteReader();
+                                reader7.Close();
+                                DBconnect.Close();
+                            }
+                            reader6.Close();
+                            DBconnect.Close();
+                        }
+                    }
+                    reader4.Close();
+                    DBconnect.Close();
+                    reader5.Close();
+                    DBconnect.Close();
+
                     MessageBox.Show("Zaakceptowano pomyślnie");
                     AdmWin next = new AdmWin("Admin", "Admin");
                     next.Show();
                     this.Hide();
                 }
+                reader3.Close();
+                DBconnect.Close();
             }
 
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.ColumnIndex == 3)
             {
-                Console.WriteLine("przycisnieto przycisk odmowy");
+                //Console.WriteLine("przycisnieto przycisk odmowy");
                 var wartośćKonkretnejKomórki = senderGrid.Rows[e.RowIndex].Cells[0].Value;
                 String[] name = wartośćKonkretnejKomórki.ToString().Split(' ');
                 // Console.WriteLine(name[0] + " " + name[1]);
@@ -163,7 +214,11 @@ namespace Project_Rup
                     AdmWin next = new AdmWin("Admin", "Admin");
                     next.Show();
                     this.Hide();
+                    reader6.Close();
+                    DBconnect.Close();
                 }
+                reader5.Close();
+                DBconnect.Close();
             }
         }
     }
