@@ -87,6 +87,11 @@ namespace Project_Rup
             DBconnect.Close();
         }
 
+        ///
+        /// metoda odpowiedzialna za akcje przycisków w tabeli
+        /// 
+
+
         private void tabela1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             string connetionString, sql = "";

@@ -22,7 +22,7 @@ namespace Project_Rup
             InitializeComponent();
         }
         ///
-        /// potwierdzenie logowania również poprzez naciśnięcie klawisza Enter
+        /// potwierdzenie logowania również poprzez naciśnięcie klawisza Enter w drugim polu tekstowym
         /// 
         private void loginTextBox2_KeyDown(object sender, KeyEventArgs e)
         {
@@ -31,6 +31,10 @@ namespace Project_Rup
                 connButton.PerformClick();
             }
         }
+
+        /// 
+        /// przycisk połączenia
+        /// 
 
         private void connButton_Click(object sender, EventArgs e)
         {

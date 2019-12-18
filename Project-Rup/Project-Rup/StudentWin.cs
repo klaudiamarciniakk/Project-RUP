@@ -169,6 +169,10 @@ namespace Project_Rup
             next.Show();
         }
 
+        /// 
+        /// początek generowania planu z podanych warunków
+        /// 
+
         private void generateButton_Click(object sender, EventArgs e)
         {
             string connetionString, sql = "";
@@ -251,6 +255,10 @@ namespace Project_Rup
             comboBox2.Enabled = false;
             comboBox3.Enabled = false;
         }
+
+        ///
+        /// wysyłanie wygenerowanego planu na serwer 
+        /// 
 
         private void saveButton_Click(object sender, EventArgs e)
         {

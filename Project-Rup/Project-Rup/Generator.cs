@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace Project_Rup
 {
     ///
-    /// klasa generująca plan zajęć według wcześnej wybranych kryteriów (przedziały godzinowe, okienka, wagi nauczycieli)
+    /// klasa generująca plan zajęć według wcześnej wybranych kryteriów
     /// 
     class Generator
     {
@@ -75,7 +75,11 @@ namespace Project_Rup
                 }
             }
         }
-
+        
+        /// 
+        /// metoda generuje wszystkie plany i zwraca ten z najmniejszą wagą końcową
+        /// 
+        
         private int[,] GenerateAll()
         {
             List<List<int>> allPlans = new List<List<int>>();
@@ -468,6 +472,10 @@ namespace Project_Rup
             return noGrid;
         }
 
+        /// 
+        /// metoda zwracająca liczbę okien w planie 
+        /// 
+      
         private int CheckBreaks(int[,] noGrid)
         {
             if (windowCrit == 0)
@@ -536,6 +544,10 @@ namespace Project_Rup
                 return counter;
             }
         }
+
+        /// 
+        /// metoda zwracająca najlepszego nauczyciela z danego przedmiotu możliwego do wpisania w tablice
+        /// 
 
         private (int, int, int, int) CheckLoPref(int subjNumb, int prefValue, int[,] noGreed)
         {
